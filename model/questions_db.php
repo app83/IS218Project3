@@ -66,4 +66,17 @@ function edit_question($questionId, $title, $body, $skills){
     $statement->execute();
     $statement->closeCursor();
 }
+function get_question($questionId)
+{
+    global $db;
+    $query = 'SELECT * FROM questions WHERE id = :questionId';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':questionId', $questionId);
+    $statement->execute();
+    $question = $statement->fetch();
+    $statement->closeCursor();
+
+    return $question;
+
+}
 ?>
